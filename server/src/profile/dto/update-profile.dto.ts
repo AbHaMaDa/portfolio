@@ -28,4 +28,8 @@ export class UpdateProfileDto {
   @IsOptional()
   @IsString()
   resumeUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  avatarUrl?: string;
 }

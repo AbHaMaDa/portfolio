@@ -7,6 +7,7 @@ export interface Profile {
   githubUrl: string;
   linkedinUrl: string;
   resumeUrl: string;
+  avatarUrl?: string;
   updatedAt?: string;
 }
 

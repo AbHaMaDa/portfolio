@@ -25,6 +25,9 @@ export class Profile {
 
   @Prop({ default: '' })
   resumeUrl: string;
+
+  @Prop({ default: '/your-photo.png' })
+  avatarUrl: string;
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);

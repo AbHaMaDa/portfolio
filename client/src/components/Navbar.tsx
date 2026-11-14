@@ -12,34 +12,59 @@ export const Navbar: React.FC<NavbarProps> = ({ profile }) => {
   const isHome = location.pathname === '/';
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#09090B]/85 border-b border-white/[0.08]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold tracking-tight text-white hover:text-blue-400 transition">
-          {profile?.fullName || 'Portfolio'}
-          <span className="text-blue-500">.</span>
+        {/* Standalone Brand Logo */}
+        <Link
+          to="/"
+          className="flex items-center group transition"
+          title="Home"
+        >
+          <div className="w-10 h-10 rounded-xl bg-[#141418] border border-white/[0.1] p-1 flex items-center justify-center shadow-md shadow-purple-500/10 group-hover:border-cyan-500/50 group-hover:shadow-cyan-500/20 group-hover:scale-105 transition-all duration-300">
+            <img src="/logo.svg" alt="AB Logo" className="w-full h-full object-contain" />
+          </div>
         </Link>
 
-        <nav className="flex items-center gap-6 text-sm font-medium text-slate-300">
+        {/* Navigation & Actions */}
+        <nav className="flex items-center gap-5 sm:gap-7 text-sm font-medium text-slate-300">
           {isHome ? (
-            <>
-              <a href="#about" className="hover:text-white transition">About</a>
-              <a href="#skills" className="hover:text-white transition">Skills</a>
-              <a href="#projects" className="hover:text-white transition">Projects</a>
-            </>
+            <div className="hidden md:flex items-center gap-6 text-sm">
+              <a
+                href="#about"
+                className="hover:text-white transition-colors duration-200 hover:text-cyan-400"
+              >
+                About
+              </a>
+              <a
+                href="#skills"
+                className="hover:text-white transition-colors duration-200 hover:text-cyan-400"
+              >
+                Skills
+              </a>
+              <a
+                href="#projects"
+                className="hover:text-white transition-colors duration-200 hover:text-cyan-400"
+              >
+                Projects
+              </a>
+            </div>
           ) : (
-            <Link to="/" className="hover:text-white transition">Home</Link>
+            <Link to="/" className="hover:text-cyan-400 transition">
+              Home
+            </Link>
           )}
 
-          <div className="flex items-center gap-3 border-l border-slate-800 pl-6">
+          {/* Social Icons & Admin CTA */}
+          <div className="flex items-center gap-3 sm:gap-4 md:border-l md:border-white/[0.08] md:pl-6">
             {profile?.githubUrl && (
               <a
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-slate-400 hover:text-white transition"
+                className="text-slate-400 hover:text-white hover:scale-110 transition p-1"
                 title="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             )}
             {profile?.linkedinUrl && (
@@ -47,10 +72,10 @@ export const Navbar: React.FC<NavbarProps> = ({ profile }) => {
                 href={profile.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-slate-400 hover:text-white transition"
+                className="text-slate-400 hover:text-[#06B6D4] hover:scale-110 transition p-1"
                 title="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             )}
             {profile?.resumeUrl && (
@@ -58,15 +83,17 @@ export const Navbar: React.FC<NavbarProps> = ({ profile }) => {
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-slate-400 hover:text-blue-400 transition"
+                className="text-slate-400 hover:text-[#F97316] hover:scale-110 transition p-1"
                 title="Resume"
               >
-                <FileText className="w-5 h-5" />
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             )}
+
+            {/* Distinct Admin Button styled with subtle orange border */}
             <Link
               to="/admin"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/40 text-orange-400 hover:border-orange-500 hover:bg-orange-500/10 text-xs font-medium transition-all duration-200 shadow-sm shadow-orange-500/10"
               title="Admin Portal"
             >
               <Lock className="w-3.5 h-3.5" />
