@@ -409,8 +409,8 @@ async function seed() {
   const projectModel = app.get<Model<Project>>(getModelToken(Project.name));
 
   // ── Admin User ───────────────────────────────────────────────────────────
-  const email = process.env.ADMIN_EMAIL ?? 'admin@portfolio.dev';
-  const password = process.env.ADMIN_PASSWORD ?? 'ChangeMe123!';
+  const email = process.env.ADMIN_EMAIL ?? 'abdallahhamada2103@gmail.com';
+  const password = process.env.ADMIN_PASSWORD ?? 'abdallah0033';
 
   const existingAdmin = await adminModel.findOne({ email });
   if (existingAdmin) {
