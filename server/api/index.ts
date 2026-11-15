@@ -43,10 +43,11 @@ export default async function handler(req: express.Request, res: express.Respons
     return;
   }
 
-  // Serve the health check at the site root as well as /api/health
+  // Serve the status page at the site root; JSON health at /health(z)
   const path = req.url?.split('?')[0];
-  if (req.method === 'GET' && (path === '/' || path === '/health' || path === '/healthz')) {
-    req.url = '/api/health';
+  if (req.method === 'GET') {
+    if (path === '/') req.url = '/api/status-page';
+    else if (path === '/health' || path === '/healthz') req.url = '/api/health';
   }
 
   server(req, res);
