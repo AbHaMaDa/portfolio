@@ -9,13 +9,12 @@ const MAX_FILE_SIZE = 4 * 1024 * 1024;
 
 @Injectable()
 export class UploadService {
-  private uploadDir = path.resolve(process.cwd(), 'uploads');
-
-  constructor(private config: ConfigService) {
-    if (!fs.existsSync(this.uploadDir)) {
-      fs.mkdirSync(this.uploadDir, { recursive: true });
-    }
+  // Vercel lambdas have a read-only filesystem except /tmp
+  private get uploadDir() {
+    return process.env.VERCEL ? '/tmp/uploads' : path.resolve(process.cwd(), 'uploads');
   }
+
+  constructor(private config: ConfigService) {}
 
   async upload(file: Express.Multer.File) {
     if (!file) throw new BadRequestException('No file provided');
@@ -49,6 +48,9 @@ export class UploadService {
     }
 
     // Local development: save to disk and serve via GET /api/upload/:filename
+    if (!fs.existsSync(this.uploadDir)) {
+      fs.mkdirSync(this.uploadDir, { recursive: true });
+    }
     const targetPath = path.join(this.uploadDir, safeName);
     fs.writeFileSync(targetPath, file.buffer);
 
