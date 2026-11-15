@@ -32,5 +32,12 @@ async function bootstrap() {
 
 export default async function handler(req: express.Request, res: express.Response) {
   await bootstrap();
+
+  // Serve the health check at the site root as well as /api/health
+  const path = req.url?.split('?')[0];
+  if (req.method === 'GET' && (path === '/' || path === '/health' || path === '/healthz')) {
+    req.url = '/api/health';
+  }
+
   server(req, res);
 }
