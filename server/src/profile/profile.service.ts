@@ -18,7 +18,7 @@ export class ProfileService {
 
   async update(dto: UpdateProfileDto) {
     const profile = await this.profileModel.findOneAndUpdate({}, dto, {
-      new: true,
+      returnDocument: 'after',
       upsert: true,
     });
     return profile;

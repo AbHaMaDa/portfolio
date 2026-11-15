@@ -176,7 +176,7 @@ export const HomePage: React.FC = () => {
 
               <div className="px-3 sm:px-4 text-center sm:text-left">
                 <div className="text-xl sm:text-2xl font-extrabold text-[#8B5CF6] tracking-tight truncate">
-                  Full MERN
+                  Full Stack
                 </div>
                 <div className="text-[11px] sm:text-xs font-medium text-slate-400 mt-0.5">
                   & API Architecture

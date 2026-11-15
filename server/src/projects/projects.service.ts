@@ -37,7 +37,7 @@ export class ProjectsService {
     if (skillIds !== undefined) update.skills = skillIds;
 
     const project = await this.projectModel
-      .findByIdAndUpdate(id, update, { new: true })
+      .findByIdAndUpdate(id, update, { returnDocument: 'after' })
       .populate('skills');
     if (!project) throw new NotFoundException('Project not found');
     return project;

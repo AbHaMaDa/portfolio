@@ -20,7 +20,7 @@ export class SkillsService {
   }
 
   async update(id: string, dto: UpdateSkillDto) {
-    const skill = await this.skillModel.findByIdAndUpdate(id, dto, { new: true });
+    const skill = await this.skillModel.findByIdAndUpdate(id, dto, { returnDocument: 'after' });
     if (!skill) throw new NotFoundException('Skill not found');
     return skill;
   }
