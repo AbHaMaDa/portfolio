@@ -31,7 +31,16 @@ async function bootstrap() {
 }
 
 export default async function handler(req: express.Request, res: express.Response) {
-  await bootstrap();
+  try {
+    await bootstrap();
+  } catch (err) {
+    console.error('Bootstrap failed:', err);
+    res.status(500).json({
+      status: 'error',
+      message: err instanceof Error ? err.message : String(err),
+    });
+    return;
+  }
 
   // Serve the health check at the site root as well as /api/health
   const path = req.url?.split('?')[0];
